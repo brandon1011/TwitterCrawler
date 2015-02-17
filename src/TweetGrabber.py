@@ -15,11 +15,11 @@ class TweetGrabber:
 		self.maxtime = maxtime
 		self.tweets = None
 
-	def fetchTweet(self):
+	def fetchTweet(self, limit=20):
 		########   set query parameters
 		params = urllib.urlencode({'apikey' : API_KEY, 'q' :self.hashtag,
 			'mintime': str(self.mintime), 'maxtime': str(self.maxtime),
-			'new_only': '1', 'include_metrics':'1', 'limit': 20})
+			'new_only': '1', 'include_metrics':'1', 'limit': limit})
 		#########   create and send HTTP request
 		req_url = URL + '?' + params
 		req = httplib.HTTPConnection(HOST)
@@ -36,7 +36,6 @@ class TweetGrabber:
 		ret = json.loads(resp_content)
 		self.tweets = ret['response']['results']['list']
 		self.it = 0
-
 
 	def nextTweet(self):
 		if self.tweets is None or self.it >= len(self.tweets):
