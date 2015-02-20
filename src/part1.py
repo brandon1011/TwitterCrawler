@@ -21,6 +21,6 @@ for hashtag in hashtags:
 		nextTweet = grabber.nextTweet()
 		if nextTweet is not None:
 			print(json.dumps(nextTweet))
-		else
+		else:
 			break
 
