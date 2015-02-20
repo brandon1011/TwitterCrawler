@@ -32,7 +32,7 @@ while (win_start < maxtime):
 		while True:
 			nextTweet = grabber.nextTweet()
 			if nextTweet is not None:
-				f_tweets.write(json.dumps(nextTweet))
+				f_tweets.write(json.dumps(nextTweet)+ '\n')
 			else:
 				break
 
