@@ -16,7 +16,7 @@ class TweetGrabber:
 		self.tweets = None
 
         # Added result limit parameter for our convenience.
-	def fetchTweet(self, limit=20):
+	def fetchTweet(self, limit=500):
 		########   set query parameters
 		params = urllib.urlencode({'apikey' : API_KEY, 'q' :self.hashtag,
 			'mintime': str(self.mintime), 'maxtime': str(self.maxtime),
@@ -45,8 +45,10 @@ class TweetGrabber:
 		tweet = self.tweets[self.it]
 		self.it += 1
 		return tweet
-
-		
-
+	
+	def countTweets(self):
+		if (self.tweets is None):
+			return 0
+		return len(self.tweets)
 
 		
