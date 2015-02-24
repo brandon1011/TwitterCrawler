@@ -22,12 +22,29 @@ def dumpTweetMetadata(tweetLine, printing=True):
 
         # It's not sure whether to use user's 'real' name or nickname. We just use nickname for now.
         user = (tweetObj['author']['nick'])
-	
+
+	printDict = {'Post date': postDate, 'Text': text, 'Number of retweets': retweet, 'User': user}
 	if printing:
-		printDict = {'Post date': postDate, 'Text': text, 'Number of retweets': retweet, 'User': user}
         	print(json.dumps(printDict))
 
 	workDict = printDict
 	workDict['Post date'] = postDateInt
 
 	return workDict
+
+def main():
+	f = open('../result/top_tweets.txt', 'r')
+	l = 1
+	for line in f:
+		tweet = dumpTweetMetadata(line, printing=False)
+		print('**** Tweet ' + str(l) + ':')
+		print('Text: ' + tweet['Text'])
+		print('User: ' + tweet['User'])
+		print('Date: ' + str(dt.datetime.fromtimestamp(tweet['Post date'])))
+		print('')
+		l += 1
+
+if __name__ == '__main__':
+	main()
+
+
